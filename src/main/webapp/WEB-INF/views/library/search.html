@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+	<form th:method="GET" th:action="@{/library/search}">
+	    <label>Введите поисковый запрос: </label>
+	    <input type="text" th:name="request"/>
+	</form>
+	<div th:if="${library.size() == 0}">
+		<p>Книг не найдено((</p>
+	</div>
+	
+	<div th:unless="${library.size() == 0}" th:each="book : ${library}">
+	    <a th:href="@{/library/{id}(id=${book.getBook_id()})}"
+		       th:text="${book.getName() + ', ' + book.getYear()}">user</a>
+	</div>
+</body>
+</html>
